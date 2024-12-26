@@ -14,6 +14,10 @@ export default function App() {
     ]);
   }
 
+  function handleDeleteGoal(id) {
+    setGoalsList((prevState) => prevState.filter((goal) => goal.id !== id));
+  }
+
   return (
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={handleAddGoal} />
@@ -21,7 +25,9 @@ export default function App() {
         <FlatList
           data={goalsList}
           renderItem={(itemData) => {
-            return <GoalItem goal={itemData.item} />;
+            return (
+              <GoalItem goal={itemData.item} onDeleteGoal={handleDeleteGoal} />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.id;
