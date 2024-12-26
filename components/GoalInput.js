@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { StyleSheet, View, Button, TextInput, Modal } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Button,
+  TextInput,
+  Modal,
+  Image,
+} from "react-native";
+
+const goalLogo = require("../assets/goal.png");
 
 export default function GoalInput({ onAddGoal, visible, onCancel }) {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -11,6 +20,7 @@ export default function GoalInput({ onAddGoal, visible, onCancel }) {
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image style={styles.image} source={goalLogo} />
         <TextInput
           style={styles.textInput}
           placeholder="Your course goal!"
@@ -19,17 +29,18 @@ export default function GoalInput({ onAddGoal, visible, onCancel }) {
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
+            <Button title="Cancel" color="#F651A3" onPress={onCancel} />
+          </View>
+          <View style={styles.button}>
             <Button
               title="Add Goal"
+              color="#b180f0"
               onPress={() => {
                 if (enteredGoal === "") return;
                 onAddGoal(enteredGoal);
                 setEnteredGoal("");
               }}
             />
-          </View>
-          <View style={styles.button}>
-            <Button title="Cancel" onPress={onCancel} />
           </View>
         </View>
       </View>
@@ -42,16 +53,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    backgroundColor: "#311b6b",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#e4d0ff",
+    borderRadius: 6,
     width: "100%",
-    padding: 10,
+    padding: 16,
+    color: "#120438",
+    backgroundColor: "#e4d0ff",
   },
   buttonContainer: {
     flexDirection: "row",
